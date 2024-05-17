@@ -25,8 +25,8 @@
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="300"/>
         </Style>
-        
-        <Style TargetType="Path">
+
+        <Style x:Key="Sym_Path" TargetType="Path">
             <Setter Property="Data" Value="M12 2c2.3 0 4.3 2 4.3 
                   4.2a4.45 4.45 0 0 1-2.26 3.8c1-.5 2.46-.5 
                   2.46-.5c2.5 0 4.5 1.8 4.5 4.3S19 18 16.5 
@@ -39,17 +39,18 @@
         </Style>
         
     </UserControl.Resources>
-    <Grid Width="250" Height="350">
+    <Grid x:Name="MainGrid" Width="250" Height="350">
+        <TextBlock x:Name="THETEST" Text="Template" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="2"/>
         <Border BorderBrush="LightGray" Background="white" BorderThickness="2" CornerRadius="2"/>
 
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
             <TextBlock Style="{StaticResource Card_Value}" TextAlignment="Center"/>
-            <Path Fill="Coral" Stretch="UniformToFill"/>
+            <Path x:Name="TopSymbol" Style="{StaticResource Sym_Path}" Fill="Coral" Stretch="UniformToFill"/>
         </StackPanel>
 
         <Grid Style= "{StaticResource Center_sym}">
             <Border BorderBrush="Black" BorderThickness="2" CornerRadius="2"/>
-            <Path Fill="Coral" Height="60" Stretch="Fill" Width="60"/>
+            <Path x:Name="CenterSymbol" Style="{StaticResource Sym_Path}" Fill="Coral" Height="60" Stretch="Fill" Width="60"/>
             <TextBlock Text="{Binding Symbol, RelativeSource={RelativeSource AncestorType=UserControl}}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
         </Grid>
 
@@ -64,7 +65,7 @@
                 </TransformGroup>
             </StackPanel.RenderTransform>
             <TextBlock Style="{StaticResource Card_Value}" TextAlignment="Center"/>
-            <Path Fill="Coral" Stretch="UniformToFill"/>
+            <Path x:Name="BottomSymbol" Style="{StaticResource Sym_Path}" Fill="Coral" Stretch="UniformToFill"/>
         </StackPanel>
 
     </Grid>

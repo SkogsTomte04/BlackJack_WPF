@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <local:Card CardValue="K" Symbol="Spades">
-        </local:Card>
+        <local:Card CardValue="K" Symbol="Clubs" cardSuits="CLUBS"/>
     </Grid>
 </Window>
