@@ -6,7 +6,19 @@
         xmlns:local="clr-namespace:CustomElement"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="local:Card">
+            <Setter Property="Scale" Value="0.5"/>
+        </Style>
+    </Window.Resources>
+
+
     <Grid>
-        <local:Card CardValue="K" Symbol="Clubs" cardSuits="CLUBS"/>
+        <Button x:Name="AddCardButton" Content="DrawCard" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Click="AddCardButton_Click"/>
+        <StackPanel x:Name="CardStack" Orientation="Horizontal">
+
+            <local:Card cardSuits="CLUBS" CardValue="K"/>
+            <local:Card cardSuits="DIAMONDS" CardValue="Q"/>
+        </StackPanel>
     </Grid>
 </Window>

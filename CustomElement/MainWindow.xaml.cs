@@ -24,5 +24,14 @@ namespace CustomElement
         {
             InitializeComponent();
         }
+        
+
+        private void AddCardButton_Click(object sender, RoutedEventArgs e)
+        {
+            Card card = Deck.drawcard();
+            
+            CardStack.Children.Add(card);
+        }
+        private CardDeck Deck = new CardDeck();
     }
 }
