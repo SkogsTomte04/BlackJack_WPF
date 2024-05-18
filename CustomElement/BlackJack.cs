@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CustomElement
 {
@@ -75,7 +76,7 @@ namespace CustomElement
             }
             if (playerfold == true && housefold == true)
             {
-                Console.WriteLine("Both players have folded!");
+                MessageBox.Show("Both players have folded!");
                 return false;
             }
             else

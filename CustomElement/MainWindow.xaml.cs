@@ -44,6 +44,13 @@ namespace CustomElement
             HouseValue.Text = $"Hand Value: {blackJack.handValue(blackJack.GetHouseHand())}";
         }
 
+
+
+
+
+
+
+        //Event listeners below:
         private void AddCardButton_Click(object sender, RoutedEventArgs e)
         {
             Card playercard = blackJack.hit();
@@ -55,26 +62,36 @@ namespace CustomElement
                 HouseHand.Children.Add(housecard);
             }
             UpdateValue();
-        }
-        private BlackJack blackJack = new BlackJack();
 
-        private void FlipHiddenCard_Click(object sender, RoutedEventArgs e)
-        {
-            foreach(Card card in HouseHand.Children)
+
+            if (blackJack.checkGameState() == false) 
             {
-                if(card.Name == "Hidden")
+                GameEndUI.Visibility = Visibility.Visible;
+                GameEndResult.Text = blackJack.getresult();
+                foreach (Card card in HouseHand.Children) // make this a function christ
                 {
-                    if(card.Hidden == true)
+                    if (card.Name == "Hidden")
                     {
-                        card.Hidden = false;
+                        if (card.Hidden == true)
+                        {
+                            card.Hidden = false;
+                        }
+                        else
+                        {
+                            card.Hidden = true;
+                        }
+
                     }
-                    else
-                    {
-                        card.Hidden = true;
-                    }
-                    
                 }
             }
         }
+        
+
+        private void StandButton_Click(object sender, RoutedEventArgs e)
+        {
+            blackJack.PlayerFold();
+        }
+        
+        private BlackJack blackJack = new BlackJack();
     }
 }

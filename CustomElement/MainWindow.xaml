@@ -10,29 +10,54 @@
 
     <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition/>
+            <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Separator Height="2" Background="Black" Width="auto" VerticalAlignment="Bottom" Margin="0,0,0,0"/>
+        
+        <Separator Height="2" Background="Black" Width="auto" VerticalAlignment="Bottom" Margin="0,0,0,0" Grid.ColumnSpan="3"/>
 
-        <StackPanel x:Name="HouseHand" Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Height="100" HorizontalAlignment="Center">
+        <StackPanel x:Name="HouseHand" Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Height="100" HorizontalAlignment="Center"/>
+        
+        <TextBlock x:Name="HouseValue" Text="Hand Value: 0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" />
 
-        </StackPanel>
-        <TextBlock x:Name="HouseValue" Text="Hand Value: 0" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <StackPanel x:Name="PlayerHand" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Height="100" HorizontalAlignment="Center"/>
 
-        <StackPanel x:Name="PlayerHand" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Height="100" HorizontalAlignment="Center">
-            
-        </StackPanel>
         <TextBlock x:Name="PlayerValue" Text="Hand Value: 0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" />
+        
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="AddCardButton" Content="DrawCard" Height="auto" Width="auto"  Click="AddCardButton_Click" Margin="5,0,5,0"/>
-            <Button x:Name="FlipHiddenCard" Content="Flip Card" Margin="5,0,5,0" Click="FlipHiddenCard_Click"/>
+            <Button x:Name="StandButton" Content="Stand" Margin="5,0,5,0" Click="StandButton_Click"/>
         </StackPanel>
-        
+
+
+
+
+
+        <Grid x:Name="GameEndUI" Grid.ColumnSpan="3" Grid.RowSpan="3" Panel.ZIndex="4" Visibility="Hidden">
+            
+            <Grid.Background>
+                <SolidColorBrush Color="#FF213588" Opacity="0.5"/>
+            </Grid.Background>
+            
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Height="200" Width="300" Background="Gray">
+                
+                <TextBlock x:Name="GameEndResult" Text="(Game result)" FontSize="30" HorizontalAlignment="Center" Margin="0,40,0,40" />
+                
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="ReplayButton" Content="Play Again" Width="100" Margin="10,0,10,0"/>
+                    <Button x:Name="Quit" Content="Quit" Width="100" Margin="10,0,10,0"/>
+                </StackPanel>
+                
+            </StackPanel>
+
+        </Grid>
         
     </Grid>
+    
 </Window>
