@@ -13,46 +13,12 @@ namespace CustomElement
             Card[] h = { deck.drawcard(true), deck.drawcard(false) };
             Card[] p = { deck.drawcard(false), deck.drawcard(false) };
 
+            h[0].Name = "Hidden"; // assigns name "Hidden" to dealers upside down card so i can find it later
+
             houseHand.AddRange(h);
             playerHand.AddRange(p);
         }
-        public void play()
-        {
-            bool active = true;
-            while (active)
-            {
-                string i = " ";
-                if (playerfold == false)
-                {
-                    //display();
-                    
-                    Console.WriteLine("1. Hit\n2. Fold");
-                    i = Console.ReadLine();
-                    if (i == "1")
-                    {
-                        hit();
-                    }
-                    else if (i == "2")
-                    {
-                        playerfold = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("ERROR: input 404");
-                    }
-                    Console.Clear();
 
-                }
-
-
-                houseTurn();
-
-                active = checkGameState();
-
-
-            }
-            //getresult();
-        }
         public void PlayerFold()
         {
             playerfold= true;
@@ -87,15 +53,18 @@ namespace CustomElement
             };
             
         }
-        public void houseTurn()
+        public Card houseTurn()
         {
             if (handValue(houseHand) < 16)
             {
-                houseHand.Add(deck.drawcard(false));
+                Card card = deck.drawcard(false);
+                houseHand.Add(card);
+                return card;
             }
             else
             {
                 housefold = true;
+                return null;
             }
         }
         public bool checkGameState()
@@ -114,10 +83,11 @@ namespace CustomElement
                 return true;
             }
         }
-        public void hit()
+        public Card hit()
         {
             Card newcard = deck.drawcard(false);
             playerHand.Add(newcard);
+            return newcard;
         }
 
 

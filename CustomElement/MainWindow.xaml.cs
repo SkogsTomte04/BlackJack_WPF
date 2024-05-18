@@ -33,19 +33,48 @@ namespace CustomElement
                 HouseHand.Children.Add(card);
 
             }
+            UpdateValue();
+
+
+        }
+
+        public void UpdateValue()
+        {
             PlayerValue.Text = $"Hand Value: {blackJack.handValue(blackJack.GetPlayerHand())}";
             HouseValue.Text = $"Hand Value: {blackJack.handValue(blackJack.GetHouseHand())}";
         }
 
-
         private void AddCardButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Card playercard = blackJack.hit();
+            PlayerHand.Children.Add(playercard);
 
-
+            Card housecard = blackJack.houseTurn();
+            if ( housecard != null)
+            {
+                HouseHand.Children.Add(housecard);
+            }
+            UpdateValue();
         }
         private BlackJack blackJack = new BlackJack();
 
-        
+        private void FlipHiddenCard_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(Card card in HouseHand.Children)
+            {
+                if(card.Name == "Hidden")
+                {
+                    if(card.Hidden == true)
+                    {
+                        card.Hidden = false;
+                    }
+                    else
+                    {
+                        card.Hidden = true;
+                    }
+                    
+                }
+            }
+        }
     }
 }
