@@ -67,6 +67,7 @@ namespace CustomElement
                 housefold = true;
                 return null;
             }
+
         }
         public bool checkGameState()
         {
@@ -133,6 +134,6 @@ namespace CustomElement
         private CardDeck deck = new CardDeck();
         private int pot = 200;
         private List<Card> houseHand = new List<Card>(), playerHand = new List<Card>();
-        private bool playerfold = false, housefold = false;
+        public bool playerfold = false, housefold = false;
     }
 }
