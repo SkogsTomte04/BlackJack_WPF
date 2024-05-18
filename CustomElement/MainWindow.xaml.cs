@@ -23,6 +23,13 @@ namespace CustomElement
         public MainWindow()
         {
             InitializeComponent();
+            
+            StartGame();
+
+        }
+
+        public void StartGame()
+        {
             foreach (Card card in blackJack.GetPlayerHand())
             {
                 PlayerHand.Children.Add(card);
@@ -34,8 +41,6 @@ namespace CustomElement
 
             }
             UpdateValue();
-
-
         }
 
         public void UpdateValue()
@@ -46,24 +51,20 @@ namespace CustomElement
 
         public void Turn()
         {
+            CheckIfEnd();
 
             Card housecard = blackJack.houseTurn();
             if (housecard != null)
             {
                 HouseHand.Children.Add(housecard);
+                UpdateValue();
             }
-            UpdateValue();
-
-            CheckIfEnd();
             
         }
 
         public void CheckIfEnd()
         {
-            if (blackJack.playerfold == true && blackJack.housefold == false)
-            {
-                Turn();
-            }
+            
             if (blackJack.checkGameState() == false)
             {
 
@@ -87,13 +88,31 @@ namespace CustomElement
             }
         }
 
+        public void RestartGame()
+        {
+            blackJack = new BlackJack();
+
+            PlayerHand.Children.Clear();
+            HouseHand.Children.Clear();
+
+            GameEndUI.Visibility = Visibility.Hidden;
+
+            StartGame();
+
+
+        }
+
 
 
         //Event listeners below:
         private void AddCardButton_Click(object sender, RoutedEventArgs e)
         {
-            Card playercard = blackJack.hit();
-            PlayerHand.Children.Add(playercard);
+            if (blackJack.playerfold != true)
+            {
+                Card playercard = blackJack.hit();
+                PlayerHand.Children.Add(playercard);
+            }
+            
             Turn();
             
         }
@@ -107,5 +126,10 @@ namespace CustomElement
         }
         
         private BlackJack blackJack = new BlackJack();
+
+        private void ReplayButton_Click(object sender, RoutedEventArgs e)
+        {
+            RestartGame();
+        }
     }
 }

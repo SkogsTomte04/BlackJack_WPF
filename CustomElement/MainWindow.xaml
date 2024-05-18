@@ -50,7 +50,7 @@
                 <TextBlock x:Name="GameEndResult" Text="(Game result)" FontSize="30" HorizontalAlignment="Center" Margin="0,40,0,40" />
                 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button x:Name="ReplayButton" Content="Play Again" Width="100" Margin="10,0,10,0"/>
+                    <Button x:Name="ReplayButton" Content="Play Again" Width="100" Margin="10,0,10,0" Click="ReplayButton_Click"/>
                     <Button x:Name="Quit" Content="Quit" Width="100" Margin="10,0,10,0"/>
                 </StackPanel>
                 

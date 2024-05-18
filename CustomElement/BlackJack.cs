@@ -34,24 +34,17 @@ namespace CustomElement
 
             if (p > h && p <= 21)
             {
-                pot *= 2;
-                return $"PLAYER WON: {pot}";
-                
+                return "Victory1"; 
             }
-            else if (p == h)
+            if (p <= 21 && h > 21)
             {
-                return "Draw!!!";
+                return "Victory: House fat";
             }
-            else
+            if (p == h)
             {
-                pot /= 2;
-                if (p > 21)
-                {
-                    return "Player hand FAT";
-                }
-                return $"Player Lost: {pot}";
-                
-            };
+                return "Draw";
+            }
+            return "Lost";
             
         }
         public Card houseTurn()
@@ -71,13 +64,12 @@ namespace CustomElement
         }
         public bool checkGameState()
         {
-            if (handValue(playerHand) > 21)
+            if (handValue(playerHand) > 21) //automatically folds player if handvalue is fat.
             {
                 playerfold = true;
             }
             if (playerfold == true && housefold == true)
             {
-                MessageBox.Show("Both players have folded!");
                 return false;
             }
             else
