@@ -28,9 +28,9 @@ namespace CustomElement
 
         private void AddCardButton_Click(object sender, RoutedEventArgs e)
         {
-            Card card = Deck.drawcard();
+            List<Card> cards = Deck.GetCardsByType(Card.CardSuits.HEARTS);
             
-            CardStack.Children.Add(card);
+            
         }
         private CardDeck Deck = new CardDeck();
     }

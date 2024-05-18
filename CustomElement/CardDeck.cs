@@ -32,7 +32,6 @@ namespace CustomElement
                     newdeck.Add(newcard);
                 }
             }
-            MessageBox.Show(newdeck.Count.ToString());
             return newdeck;
         }
 
@@ -63,6 +62,19 @@ namespace CustomElement
         public int cardsleft()
         {
             return cards.Count;
+        }
+
+        public List<Card> GetCardsByType(Card.CardSuits suit)
+        {
+            List<Card> cardbytype = new List<Card>();
+            foreach(Card card in cards)
+            {
+                if(card.cardSuits == suit)
+                {
+                    cardbytype.Add(card);
+                }
+            }
+            return cardbytype;
         }
 
         public void print()

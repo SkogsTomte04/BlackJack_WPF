@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CustomElement"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="250" RenderTransformOrigin="1,1">
+             d:DesignHeight="350" d:DesignWidth="250">
     <UserControl.Resources>
         <Style x:Key="Card_Value" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Sitka Text"/>
@@ -13,7 +13,7 @@
             <Setter Property="Text" Value="{Binding CardValue, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
         </Style>
 
-        <Style TargetType="StackPanel">
+        <Style x:Key="CornerStack" TargetType="StackPanel">
             <Setter Property="Panel.ZIndex" Value="1"/>
             <Setter Property="Background" Value="white"/>
             <Setter Property="Height" Value="80"/>
@@ -30,43 +30,43 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
+        <BooleanToVisibilityConverter x:Key="Boolconverter"/>
 
     </UserControl.Resources>
-    <UserControl.RenderTransform>
-        <TransformGroup>
-            <ScaleTransform ScaleX="{Binding Scale, RelativeSource={RelativeSource AncestorType=UserControl}}" ScaleY="{Binding Scale, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-            <SkewTransform/>
-            <RotateTransform/>
-            <TranslateTransform/>
-        </TransformGroup>
-    </UserControl.RenderTransform>
-    <Grid x:Name="MainGrid" Width="250" Height="350">
-        <Border BorderBrush="LightGray" Background="white" BorderThickness="2" CornerRadius="2"/>
 
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-            <TextBlock Style="{StaticResource Card_Value}" TextAlignment="Center"/>
-            <Path x:Name="TopSymbol" Style="{StaticResource Sym_Path}" IsEnabled="False" Fill="Coral" Stretch="UniformToFill"/>
+    <Viewbox>
+        
+        <Grid x:Name="MainGrid" Width="250" Height="350">
+            <Image Source="Assets/CardBackside.png" Stretch="Fill" Panel.ZIndex="2" Visibility="{Binding Hidden, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource Boolconverter}}"/>
+            
+            <Border BorderBrush="LightGray" Background="white" BorderThickness="2" CornerRadius="10"/>
+            
+            <StackPanel Style="{StaticResource CornerStack}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock Style="{StaticResource Card_Value}" TextAlignment="Center"/>
+                <Path x:Name="TopSymbol" Style="{StaticResource Sym_Path}" IsEnabled="False" Fill="Coral" Stretch="UniformToFill"/>
 
-        </StackPanel>
+            </StackPanel>
 
-        <Grid Style= "{StaticResource Center_sym}">
-            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="2"/>
-            <Path x:Name="CenterSymbol" Style="{StaticResource Sym_Path}" Fill="Coral" Height="60" Stretch="Fill" Width="60"/>
+            <Grid Style= "{StaticResource Center_sym}">
+                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="2"/>
+                <Path x:Name="CenterSymbol" Style="{StaticResource Sym_Path}" Fill="Coral" Height="60" Stretch="Fill" Width="60"/>
+            </Grid>
+
+
+            <StackPanel Style="{StaticResource CornerStack}" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </StackPanel.RenderTransform>
+                <TextBlock Style="{StaticResource Card_Value}" TextAlignment="Center"/>
+                <Path x:Name="BottomSymbol" Style="{StaticResource Sym_Path}" Fill="Coral" Stretch="UniformToFill"/>
+            </StackPanel>
+
         </Grid>
-
-
-        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
-            <StackPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="180"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </StackPanel.RenderTransform>
-            <TextBlock Style="{StaticResource Card_Value}" TextAlignment="Center"/>
-            <Path x:Name="BottomSymbol" Style="{StaticResource Sym_Path}" Fill="Coral" Stretch="UniformToFill"/>
-        </StackPanel>
-
-    </Grid>
+    </Viewbox>
+    
 </UserControl>

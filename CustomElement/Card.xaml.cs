@@ -63,7 +63,7 @@ namespace CustomElement
                     }
                 case CardSuits.HEARTS:
                     {
-                        TopSymbol.Data = Geometry.Parse(Hearts);
+                        SetPath(Hearts, list);
                         break;
                     }
                 case CardSuits.DIAMONDS:
@@ -87,19 +87,6 @@ namespace CustomElement
         }
 
 
-
-        public double Scale
-        {
-            get { return (double)GetValue(ScaleProperty); }
-            set { SetValue(ScaleProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Scale.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ScaleProperty =
-            DependencyProperty.Register("Scale", typeof(double), typeof(Card), new PropertyMetadata(1.0));
-
-
-
         public CardSuits cardSuits
         {
             get { return (CardSuits)GetValue(cardSuitsProperty); }
@@ -112,6 +99,18 @@ namespace CustomElement
 
 
 
+        public bool Hidden
+        {
+            get { return (bool)GetValue(HiddenProperty); }
+            set { SetValue(HiddenProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Hidden.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HiddenProperty =
+            DependencyProperty.Register("Hidden", typeof(bool), typeof(Card), new PropertyMetadata(false));
+
+
+
         public string CardValue
         {
             get { return (string)GetValue(CardValueProperty); }
@@ -119,16 +118,6 @@ namespace CustomElement
         }
 
         public static readonly DependencyProperty CardValueProperty = DependencyProperty.Register("CardValue", typeof(string), typeof(Card), new PropertyMetadata(null));
-
-
-
-        public string Symbol
-        {
-            get { return (string)GetValue(SymbolProperty); }
-            set { SetValue(SymbolProperty, value);  }
-        }
-        public static readonly DependencyProperty SymbolProperty =
-            DependencyProperty.Register("Symbol", typeof(string), typeof(Card), new PropertyMetadata(string.Empty));
 
         private readonly string 
             Clubs = "M7,0.25A3.036,3.036,0,0,0,3.964,3.286C3.964,3.8459999999999996,4.116,4.4719999999999995,4.3759999999999994,5.0569999999999995A4.029,4.029,0,0,0,3.2860000000000005,4.893000000000001A3.036,3.036,0,0,0,3.2860000000000005,10.963999999999999C3.9080000000000004,10.963999999999999,4.614000000000001,10.777000000000001,5.253,10.459999999999999L4.646999999999999,13.450000000000001A0.25,0.25,0,0,0,4.8919999999999995,13.750000000000002L9.107999999999999,13.750000000000002A0.25,0.25,0,0,0,9.353,13.450000000000001L8.747,10.459999999999999C9.386,10.777000000000001,10.091999999999999,10.963999999999999,10.713999999999999,10.963999999999999A3.036,3.036,0,0,0,10.713999999999999,4.893000000000001C10.366999999999999,4.893000000000001 9.994,4.9510000000000005 9.623999999999999,5.0569999999999995 9.884,4.4719999999999995 10.036000000000001,3.8450000000000006 10.036000000000001,3.2860000000000005A3.036,3.036,0,0,0,7,0.25\r\n",

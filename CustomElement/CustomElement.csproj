@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\CardBackside.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\CardBackside.png" />
+  </ItemGroup>
+
 </Project>
