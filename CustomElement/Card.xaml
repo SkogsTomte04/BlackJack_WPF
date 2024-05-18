@@ -35,11 +35,13 @@
     </UserControl.Resources>
 
     <Viewbox>
-        
+
         <Grid x:Name="MainGrid" Width="250" Height="350">
+            <Border Background="white" BorderThickness="2" CornerRadius="10"/>
+            <Border BorderBrush="LightGray" BorderThickness="2" CornerRadius="10" Panel.ZIndex="3"/>
             <Image Source="Assets/CardBackside.png" Stretch="Fill" Panel.ZIndex="2" Visibility="{Binding Hidden, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource Boolconverter}}"/>
             
-            <Border BorderBrush="LightGray" Background="white" BorderThickness="2" CornerRadius="10"/>
+            
             
             <StackPanel Style="{StaticResource CornerStack}" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <TextBlock Style="{StaticResource Card_Value}" TextAlignment="Center"/>

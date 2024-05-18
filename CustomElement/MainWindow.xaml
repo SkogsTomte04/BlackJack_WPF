@@ -8,10 +8,28 @@
         Title="MainWindow" Height="450" Width="800">
 
 
-    <Grid>
-        <Button x:Name="AddCardButton" Content="DrawCard" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Click="AddCardButton_Click"/>
-        <StackPanel x:Name="CardStack" Orientation="Horizontal" >
-            <local:Card CardValue="K" cardSuits="CLUBS" Hidden="True"></local:Card>
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Separator Height="2" Background="Black" Width="auto" VerticalAlignment="Bottom" Margin="0,0,0,0"/>
+
+        <StackPanel x:Name="HouseHand" Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Height="100" HorizontalAlignment="Center">
+
         </StackPanel>
+        <TextBlock x:Name="HouseValue" Text="Hand Value: 0" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+        <StackPanel x:Name="PlayerHand" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Height="100" HorizontalAlignment="Center">
+            
+        </StackPanel>
+        <TextBlock x:Name="PlayerValue" Text="Hand Value: 0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" />
+        
+        <Button x:Name="AddCardButton" Content="DrawCard" Height="auto" Width="auto" Grid.Column="1" Grid.Row="2" Click="AddCardButton_Click"/>
+        
     </Grid>
 </Window>

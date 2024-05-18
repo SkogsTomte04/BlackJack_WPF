@@ -23,15 +23,29 @@ namespace CustomElement
         public MainWindow()
         {
             InitializeComponent();
+            foreach (Card card in blackJack.GetPlayerHand())
+            {
+                PlayerHand.Children.Add(card);
+
+            }
+            foreach (Card card in blackJack.GetHouseHand())
+            {
+                HouseHand.Children.Add(card);
+
+            }
+            PlayerValue.Text = $"Hand Value: {blackJack.handValue(blackJack.GetPlayerHand())}";
+            HouseValue.Text = $"Hand Value: {blackJack.handValue(blackJack.GetHouseHand())}";
         }
-        
+
 
         private void AddCardButton_Click(object sender, RoutedEventArgs e)
         {
-            List<Card> cards = Deck.GetCardsByType(Card.CardSuits.HEARTS);
             
-            
+
+
         }
-        private CardDeck Deck = new CardDeck();
+        private BlackJack blackJack = new BlackJack();
+
+        
     }
 }

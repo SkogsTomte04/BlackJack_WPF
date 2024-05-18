@@ -12,7 +12,7 @@ namespace CustomElement
         public CardDeck()
         {
             cards = createDeck();
-            //shuffleDeck();
+            shuffleDeck();
         }
 
         public List<Card> createDeck()
@@ -52,9 +52,10 @@ namespace CustomElement
 
         }
 
-        public Card drawcard()
+        public Card drawcard(bool isHidden) // isHidden determins if card is returned facing up or down. 
         {
             Card card = cards[0];
+            card.Hidden = isHidden;
             cards.RemoveAt(0);
             return card;
         }
