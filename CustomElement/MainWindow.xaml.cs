@@ -49,17 +49,50 @@ namespace CustomElement
             HouseValue.Text = $"Hand Value: {blackJack.handValue(blackJack.GetHouseHand())}";
         }
 
-        public void Turn()
+        public async Task Turn()
         {
+            await flipHiddenCard();
+            while (!blackJack.housefold)
+            {
+
+                Card housecard = blackJack.houseTurn();
+                if (housecard != null)
+                {
+                    HouseHand.Children.Add(housecard);
+                    UpdateValue();
+                    await Task.Delay(1000);
+                }
+
+
+            }
+
+
             CheckIfEnd();
 
-            Card housecard = blackJack.houseTurn();
-            if (housecard != null)
-            {
-                HouseHand.Children.Add(housecard);
-                UpdateValue();
-            }
             
+            
+        }
+
+        public async Task flipHiddenCard()
+        {
+            foreach (Card card in HouseHand.Children) // make this a function christ
+            {
+                if (card.Name == "Hidden")
+                {
+                    if (card.Hidden == true)
+                    {
+                        card.Hidden = false;
+                        
+                    }
+                    else
+                    {
+                        card.Hidden = true;
+                        
+                    }
+
+                }
+            }
+            await Task.Delay(1000);
         }
 
         public void CheckIfEnd()
@@ -70,21 +103,6 @@ namespace CustomElement
 
                 GameEndUI.Visibility = Visibility.Visible;
                 GameEndResult.Text = blackJack.getresult();
-                foreach (Card card in HouseHand.Children) // make this a function christ
-                {
-                    if (card.Name == "Hidden")
-                    {
-                        if (card.Hidden == true)
-                        {
-                            card.Hidden = false;
-                        }
-                        else
-                        {
-                            card.Hidden = true;
-                        }
-
-                    }
-                }
             }
         }
 
@@ -107,14 +125,21 @@ namespace CustomElement
         //Event listeners below:
         private void AddCardButton_Click(object sender, RoutedEventArgs e)
         {
-            if (blackJack.playerfold != true)
+            if (blackJack.playerfold == true)
             {
-                Card playercard = blackJack.hit();
-                PlayerHand.Children.Add(playercard);
+                return;
             }
-            
-            Turn();
-            
+
+            Card playercard = blackJack.hit();
+            PlayerHand.Children.Add(playercard);
+            UpdateValue();
+            if (blackJack.handValue(blackJack.GetPlayerHand()) > 21)
+            {
+                MessageBox.Show("Auto fold!");
+                blackJack.PlayerFold();
+                Turn();
+            }
+            return;
         }
         
         
@@ -130,6 +155,11 @@ namespace CustomElement
         private void ReplayButton_Click(object sender, RoutedEventArgs e)
         {
             RestartGame();
+        }
+
+        private void Quit_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
