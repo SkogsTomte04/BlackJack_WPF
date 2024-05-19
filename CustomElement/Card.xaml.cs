@@ -86,7 +86,14 @@ namespace CustomElement
             
         }
 
-
+        private void mouseLeave(object sender, MouseEventArgs e)
+        {
+            MainGrid.Background = Brushes.AliceBlue;
+        }
+        private void mouseEnter(object sender, MouseEventArgs e)
+        {
+            MainGrid.Background = Brushes.Blue;
+        }
         public CardSuits cardSuits
         {
             get { return (CardSuits)GetValue(cardSuitsProperty); }

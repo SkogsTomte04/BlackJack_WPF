@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -73,27 +74,7 @@ namespace CustomElement
             
         }
 
-        public async Task flipHiddenCard()
-        {
-            foreach (Card card in HouseHand.Children) // make this a function christ
-            {
-                if (card.Name == "Hidden")
-                {
-                    if (card.Hidden == true)
-                    {
-                        card.Hidden = false;
-                        
-                    }
-                    else
-                    {
-                        card.Hidden = true;
-                        
-                    }
-
-                }
-            }
-            await Task.Delay(1000);
-        }
+        
 
         public void CheckIfEnd()
         {
@@ -120,7 +101,49 @@ namespace CustomElement
 
         }
 
+        public void AnimateCard(Card card)
+        {
+            /*DoubleAnimation myAnimatedCard = new DoubleAnimation();
+            myAnimatedCard.From = 200;
+            myAnimatedCard.To = 300;
+            myAnimatedCard.Duration = new Duration(TimeSpan.FromMilliseconds(3000));
 
+            Storyboard.SetTarget(myAnimatedCard, card);
+            Storyboard.SetTargetProperty(myAnimatedCard, new PropertyPath(Card.WidthProperty));
+
+            Storyboard myAnimatedCardStoryboard = new Storyboard();
+            myAnimatedCardStoryboard.Children.Add(myAnimatedCard);
+
+            card. += delegate (object sender, RoutedEventArgs args)
+            {
+                myAnimatedCardStoryboard.Begin(myWidthAnimatedButton);
+            };
+
+            myStackPanel.Children.Add(myWidthAnimatedButton);*/
+
+        }
+
+        public async Task flipHiddenCard()
+        {
+            foreach (Card card in HouseHand.Children) // make this a function christ
+            {
+                if (card.Name == "Hidden")
+                {
+                    if (card.Hidden == true)
+                    {
+                        card.Hidden = false;
+                        
+                    }
+                    else
+                    {
+                        card.Hidden = true;
+                        
+                    }
+
+                }
+            }
+            await Task.Delay(1000);
+        }
 
         //Event listeners below:
         private void AddCardButton_Click(object sender, RoutedEventArgs e)
